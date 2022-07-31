@@ -39,7 +39,4 @@ test('clicking button increments counter display', () => {
     button.simulate('click');
     const count = findByTestAttr(wrapper, 'count').text();
     expect(count).toBe('1');
-    //find button
-    // click button
-    // find display and test that number incremented
 });

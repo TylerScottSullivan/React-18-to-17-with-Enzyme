@@ -1,4 +1,75 @@
-# Getting Started with Create React App
+## Overrides in `package.json`
+
+```
+"@testing-library/jest-dom": "^5.11.4",
+"@testing-library/react": "^11.1.0",
+"@testing-library/user-event": "^12.1.10",
+"react": "^17.0.2",
+"react-dom": "^17.0.2",
+"react-router-dom": "^6.3.0",
+"react-scripts": "5.0.1",
+"typescript": "^4.7.4",
+"web-vitals": "^2.1.4"
+```
+
+Src: https://stackoverflow.com/questions/72220065/how-to-create-a-new-project-based-on-react17
+
+## Changed `index.js` lines
+
+At the top, replace:
+
+`import ReactDOM from 'react-dom/client'` -> `import ReactDOM from 'react-dom';`
+
+```
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+```
+
+to
+
+```
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+```
+
+then delete `/node_modules` and run `npm install` again
+
+
+## Enzyme packages added with following command
+
+`npm install --save-dev enzyme @wojtekmaj/enzyme-adapter-react-17 --force`
+
+
+## Changes made to `App.test.js`
+
+Replace code in the file with the following:
+
+```
+import React from 'react';
+import Enzyme, { shallow } from 'enzyme';
+import EnzymeAdapter from '@wojtekmaj/enzyme-adapter-react-17';
+import App from './App';
+
+Enzyme.configure({ adapter: new EnzymeAdapter() });
+
+test('renders non-empty component without crashing', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.exists()).toBe(true);
+});
+```
+
+
+
+
+-----------
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

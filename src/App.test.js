@@ -40,3 +40,17 @@ test('clicking button increments counter display', () => {
     const count = findByTestAttr(wrapper, 'count').text();
     expect(count).toBe('1');
 });
+
+test('renders decrement button', () => {
+    const wrapper = shallow(<App />);
+    const decrementButton = wrapper.find('[data-test="decrement-button"]');
+    expect(decrementButton.exists()).toEqual(true);
+});
+
+test('clicking button decrements counter display', () => {
+    const wrapper = setUp();
+    const decrementButton = findByTestAttr(wrapper, 'decrement-button');
+    decrementButton.simulate('click');
+    const count = findByTestAttr(wrapper, 'count').text();
+    expect(count).toBe('-1');
+});
